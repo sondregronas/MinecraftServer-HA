@@ -1,0 +1,10 @@
+{
+  "domain": "minecraft",
+  "name": "MinecraftServer-HA",
+  "documentation": "https://github.com/sondregronas/MinecraftServer-HA",
+  "requirements": [
+      "mcipc==1.1.1"
+      ],
+  "dependencies": [],
+  "codeowners": []
+}

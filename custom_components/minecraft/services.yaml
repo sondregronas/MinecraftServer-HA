@@ -1,0 +1,24 @@
+send_command:
+    description: Executes a command on the Minecraft Server using RCON
+    fields:
+        command:
+            description: Which command to execute. See https://minecraft.gamepedia.com/Commands
+            example: 'weather'
+        data:
+            description: The parameters of the command. Can be left blank
+            example: 'clear 600'
+
+mcserver_notify:
+    description: Sends a message to your Minecraft Server using RCON
+    fields:
+        message:
+            description: The message to be broadcasted
+            example: 'Hello World!'
+
+        title:
+            description: Sender of the message ingame. Can be set to blank. Default 'Home Assistant'
+            example: 'John'
+
+        target:
+            description: Receiving players. Default '@a'
+            example: 'Dinnerbone'
