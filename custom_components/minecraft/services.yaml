@@ -8,15 +8,39 @@ send_command:
             description: The parameters of the command. Can be left blank
             example: 'clear 600'
 
-mcserver_notify:
-    description: Sends a message to your Minecraft Server using RCON
+turn_off:
+    description: Sends a stop command to the server.
+
+reload:
+    description: Reloads loot tables, advancements, and functions from disk.
+
+save:
+    description: Saves the server to disk.
+
+minecraft_server_title:
+    description: Send a title to your Minecraft server. Use 'minecraft.send_command' to set title times.
     fields:
         message:
             description: The message to be broadcasted
             example: 'Hello World!'
 
         title:
-            description: Sender of the message ingame. Can be set to blank. Default 'Home Assistant'
+            description: "Title type (title | subtitle | actionbar). Note that subtitle only loads with title. Default: 'title'"
+            example: 'subtitle'
+
+        target:
+            description: Receiving players. Default '@a'
+            example: 'Dinnerbone'
+
+minecraft_server:
+    description: Sends a message on your Minecraft Server
+    fields:
+        message:
+            description: The message to be broadcasted
+            example: 'Hello World!'
+
+        title:
+            description: Sender of the message ingame. Can be set to blank for no name. Default 'Home Assistant'
             example: 'John'
 
         target:
