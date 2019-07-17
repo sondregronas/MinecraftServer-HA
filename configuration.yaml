@@ -1,0 +1,26 @@
+#######
+# SAMPLE CONFIGURATION
+#######
+sensor:
+  - platform: minecraft
+    host: 127.0.0.1
+    query_port: 25565
+    rcon_port: 5000
+    rcon_password: default
+    name: My Minecraft Server
+
+shell_command:
+  minecraft_turn_on: /home/homeassistant/.homeassistant/packages/minecraft/mcserver/start.sh
+
+# Note about the switch, sensor state does not immediately update
+switch:
+  - platform: template
+    switches:
+      minecraft_server:
+        value_template: "{{ states.sensor.my_minecraft_server.state != 'Unavailable' }}"
+        turn_on: 
+          service: shell_command.minecraft_turn_on
+        turn_off:
+          service: minecraft.turn_off
+          data:
+            entity_id: sensor.my_minecraft_server
