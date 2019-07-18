@@ -46,7 +46,8 @@ The main portion of metrics come from the query calls. This component retrieves 
 ###### RCON based metrics
 RCON metrics are retrieved from the server console itself, and therefore only a handful of metrics are picked out for time being: <br>
 - `seed` The world seed. <br>
-- `mansion_location` The next mansion location (X,Y,Z) <br>
+- `mansion_location` The next mansion location (X,Y,Z)
+
 However it is possible to call any command from the console using the rcon `send_command` service. <br> <br>
 
 #### Services (RCON required)
