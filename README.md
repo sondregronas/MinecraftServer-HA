@@ -1,6 +1,9 @@
 # MinecraftServer-HA
 A component for reading Minecraft server stats and issuing commands using RCON! Based on the [awesome mcipc project](https://github.com/conqp/mcipc). <br>
 
+![Screenshot](media/screenshot.PNG) <br> <br>
+[![Buy me a coffee](media/coffee.png)](https://www.buymeacoffee.com/JSz8KGIkD) <br> <br>
+
 #### Important note
 This component has only been tested with the Minecraft Java Edition servers - mileage may vary on altering versions
 
@@ -51,15 +54,18 @@ RCON metrics are retrieved from the server console itself, and therefore only a 
 However it is possible to call any command from the console using the rcon `send_command` service. <br> <br>
 
 #### Services (RCON required)
-###### minecraft.send_command
-Executes any command on the Minecraft Server. Uses the service_data `command` and optionally `data`. <br>
-###### minecraft.turn_off
-Sends a stop command to the server (without saving). <br>
-###### minecraft.reload
-Sends a reload command to the server (Reloads loot tables, advancements, and functions from disk). <br>
-###### minecraft.save
-Sends a save-all command to the server <br>
-###### notify.minecraft_server
-Sends a message on your server. Takes service_data `message`, `title` (Name ingame, blank none, default: 'Home Assistant'), `target` (Receiving player(s). default: '@a') <br>
-###### notify.minecraft_server_title
-Sends a title on your server. Takes service_data `message`, `title` (Style of title, `title` | `subtitle` | `actionbar`, default: 'title'), `target` (Receiving player(s). default: '@a')
+###### minecraft.send_command:
+Executes any command on the Minecraft Server. Uses the service_data `command` and optionally `data`. <br><br>
+###### minecraft.turn_off:
+Sends a stop command to the server (without saving). <br><br>
+###### minecraft.reload:
+Sends a reload command to the server (Reloads loot tables, advancements, and functions from disk). <br><br>
+###### minecraft.save:
+Sends a save-all command to the server <br><br>
+###### notify.minecraft_server:
+Sends a message on your server. Takes service_data `message`, `title` (Name ingame, blank none, default: 'Home Assistant'), `target` (Receiving player(s). default: '@a') <br><br>
+###### notify.minecraft_server_title:
+Sends a title on your server. Takes service_data `message`, `title` (Style of title, `title` | `subtitle` | `actionbar`, default: 'title'), `target` (Receiving player(s). default: '@a')<br><br>
+
+#### Legal
+Minecraft content and materials are trademarks and copyrights of Mojang and its licensors. All rights reserved. This program is free software and is not affiliated with Mojang. <br>
