@@ -1,8 +1,8 @@
-# MinecraftServer-HA
+
+# MinecraftServer-HA [<img align="right" src=media/coffee.png>](https://www.buymeacoffee.com/JSz8KGIkD) 
 A component for reading Minecraft server stats and issuing commands using RCON! Based on the [awesome mcipc project](https://github.com/conqp/mcipc). <br>
 
 ![Screenshot](media/screenshot.PNG) <br> <br>
-[![Buy me a coffee](media/coffee.png)](https://www.buymeacoffee.com/JSz8KGIkD) <br> <br>
 
 #### Important note
 This component has only been tested with the Minecraft Java Edition servers - mileage may vary on altering versions
