@@ -1,13 +1,28 @@
 #######
 # SAMPLE CONFIGURATION
 #######
-sensor:
-  - platform: minecraft
-    host: 127.0.0.1
-    query_port: 25565
-    rcon_port: 5000
-    rcon_password: default
-    name: My Minecraft Server
+minecraft:
+  host: 127.0.0.1
+  query_port: !secret mc_query_port
+  rcon_port: !secret mc_rcon_port
+  rcon_password: !secret mc_rcon_pw
+  icon: mdi:minecraft
+  sensor:
+    - type
+    - session_id
+    - motd
+    - game_type
+    - game_id
+    - version
+    - plugins
+    - map
+    - num_players
+    - max_players
+    - host_port
+    - host_ip
+    - players
+    - seed
+    - mansion_location
 
 shell_command:
   minecraft_turn_on: /home/homeassistant/.homeassistant/packages/minecraft/mcserver/start.sh
@@ -19,8 +34,28 @@ switch:
       minecraft_server:
         value_template: "{{ states.sensor.my_minecraft_server.state != 'Unavailable' }}"
         turn_on: 
-          service: shell_command.minecraft_turn_on
+        - service: shell_command.minecraft_turn_on
+        - service: input_boolean.turn_on
+          entity_id: input_boolean.minecraftserver_running
         turn_off:
-          service: minecraft.turn_off
-          data:
-            entity_id: sensor.my_minecraft_server
+        - service: minecraft.save
+          entity_id: sensor.my_minecraft_server
+        - service: minecraft.turn_off
+          entity_id: sensor.my_minecraft_server
+        - service: input_boolean.turn_off
+          entity_id: input_boolean.minecraftserver_running
+
+automation:
+  - alias: 'Minecraft on boot'
+    hide_entity: true
+    initial_state: true
+    trigger:
+    - platform: homeassistant
+      event: start
+    condition:
+    - condition: state
+      entity_id: switch.minecraft_server
+      state: 'off'
+    action:
+    - service: switch.turn_on
+      entity_id: switch.minecraft_server
