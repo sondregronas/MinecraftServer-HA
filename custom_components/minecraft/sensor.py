@@ -38,9 +38,9 @@ async def async_setup_platform(
 
     async_add_entities([MinecraftSensor(hass, discovery_info, name, icon)], True)
 
-    host 		= hass.data[DOMAIN_DATA][CONF_HOST]
-    rcon_port 	= hass.data[DOMAIN_DATA][CONF_RCON_PORT]
-    rcon_pw 	= hass.data[DOMAIN_DATA][CONF_RCON_PASSWORD]
+    host        = hass.data[DOMAIN_DATA][CONF_HOST]
+    rcon_port   = hass.data[DOMAIN_DATA][CONF_RCON_PORT]
+    rcon_pw     = hass.data[DOMAIN_DATA][CONF_RCON_PASSWORD]
 
     """RCON Sensor Services"""
     if rcon_pw is not None and rcon_port is not None:
@@ -85,11 +85,11 @@ async def async_setup_platform(
 class MinecraftSensor(Entity):
     """Minecraft Sensor class."""
     def __init__(self, hass, config, name, icon):
-        self._hass 	= hass
-        self._attr 	= config
-        self._state = 'Unavailable'
-        self._name 	= name
-        self._icon 	= icon
+        self._hass     = hass
+        self._attr     = config
+        self._state    = 'Unavailable'
+        self._name     = name
+        self._icon     = icon
 
     async def async_update(self):
         """Update the sensor."""
@@ -101,19 +101,19 @@ class MinecraftSensor(Entity):
         try:
             updated = self.hass.data[DOMAIN_DATA]["data"]
 
-            self._type 				= str(updated.type)
-            self._session_id 		= str(updated.session_id)
-            self._motd 				= str(updated.host_name)
-            self._game_type			= str(updated.game_type)
-            self._game_id 			= str(updated.game_id)
-            self._version 			= str(updated.version)
-            self._plugins 			= updated.plugins
-            self._map 				= str(updated.map)
-            self._num_players 		= str(updated.num_players)
-            self._max_players 		= str(updated.max_players)
-            self._host_port 		= str(updated.host_port)
-            self._host_ip 			= str(updated.host_ip)
-            self._players 			= updated.players
+            self._type                = str(updated.type)
+            self._session_id          = str(updated.session_id)
+            self._motd                = str(updated.host_name)
+            self._game_type           = str(updated.game_type)
+            self._game_id             = str(updated.game_id)
+            self._version             = str(updated.version)
+            self._plugins             = updated.plugins
+            self._map                 = str(updated.map)
+            self._num_players         = str(updated.num_players)
+            self._max_players         = str(updated.max_players)
+            self._host_port           = str(updated.host_port)
+            self._host_ip             = str(updated.host_ip)
+            self._players             = updated.players
 
             self._state = str(updated.num_players) + '/' + str(updated.max_players)
 
@@ -124,8 +124,8 @@ class MinecraftSensor(Entity):
 
         # Get mcipc.rcon updates
         try:
-            self._seed 				= self._hass.data[DOMAIN_DATA][ATTR_SEED]
-            self._mansion_location	= self._hass.data[DOMAIN_DATA][ATTR_MANSION_LOCATION]
+            self._seed                = self._hass.data[DOMAIN_DATA][ATTR_SEED]
+            self._mansion_location    = self._hass.data[DOMAIN_DATA][ATTR_MANSION_LOCATION]
 
         except:
             # RCON credentials missing

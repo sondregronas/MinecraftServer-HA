@@ -20,14 +20,13 @@ from .const import (
     PLATFORMS,
     REQUIRED_FILES,
     ISSUE_URL,
-    CONF_HOST, 			DEFAULT_HOST,
-    CONF_QUERY_PORT, 	DEFAULT_QUERY_PORT,
+    CONF_HOST,           DEFAULT_HOST,
+    CONF_QUERY_PORT,     DEFAULT_QUERY_PORT,
     CONF_RCON_PORT,
     CONF_RCON_PASSWORD,
-    CONF_NAME, 			DEFAULT_NAME,
-    CONF_ICON, 			DEFAULT_ICON,
-    CONF_SENSORS,		DEFAULT_SENSORS,
-    CONF_ENABLED,
+    CONF_NAME,           DEFAULT_NAME,
+    CONF_ICON,           DEFAULT_ICON,
+    CONF_SENSOR,         DEFAULT_SENSOR,
     CONF_SENSOR,
     ATTR_SEED,
     ATTR_MANSION_LOCATION,
@@ -42,17 +41,17 @@ CONFIG_SCHEMA = vol.Schema(
     {
         vol.Optional(DOMAIN): vol.Schema(
             {
-                vol.Optional(CONF_HOST,				default=DEFAULT_HOST): 				cv.string,
-                vol.Optional(CONF_QUERY_PORT,		default=DEFAULT_QUERY_PORT): 		cv.port,
-                vol.Optional(CONF_RCON_PORT): 											cv.port,
-                vol.Optional(CONF_RCON_PASSWORD):										cv.string,
-                vol.Optional(CONF_NAME, 			default=DEFAULT_NAME): 				cv.string,
-                vol.Optional(CONF_ICON,				default=DEFAULT_ICON):				cv.string,
-                vol.Optional(CONF_SENSOR,			default=DEFAULT_SENSOR):			vol.All(cv.ensure_list, [vol.In(SENSOR_TYPES)]),
+                vol.Optional(CONF_HOST,              default=DEFAULT_HOST):              cv.string,
+                vol.Optional(CONF_QUERY_PORT,        default=DEFAULT_QUERY_PORT):        cv.port,
+                vol.Optional(CONF_RCON_PORT):                                            cv.port,
+                vol.Optional(CONF_RCON_PASSWORD):                                        cv.string,
+                vol.Optional(CONF_NAME,              default=DEFAULT_NAME):              cv.string,
+                vol.Optional(CONF_ICON,              default=DEFAULT_ICON):              cv.string,
+                vol.Optional(CONF_SENSOR,            default=DEFAULT_SENSOR):            vol.All(cv.ensure_list, [vol.In(SENSOR_TYPES)]),
             }
         )
     },
-	extra=vol.ALLOW_EXTRA,
+    extra=vol.ALLOW_EXTRA,
 )
 
 # pylint: disable=unused-argument
@@ -70,20 +69,20 @@ async def async_setup(hass, config):
         return False
 
     # Grab the config
-    host 		= config[DOMAIN].get(CONF_HOST)
-    query_port	= config[DOMAIN].get(CONF_QUERY_PORT)
-    rcon_port	= config[DOMAIN].get(CONF_RCON_PORT)
-    rcon_pw		= config[DOMAIN].get(CONF_RCON_PASSWORD)
-    name		= config[DOMAIN].get(CONF_NAME)
-    icon		= config[DOMAIN].get(CONF_ICON)
+    host         = config[DOMAIN].get(CONF_HOST)
+    query_port   = config[DOMAIN].get(CONF_QUERY_PORT)
+    rcon_port    = config[DOMAIN].get(CONF_RCON_PORT)
+    rcon_pw      = config[DOMAIN].get(CONF_RCON_PASSWORD)
+    name         = config[DOMAIN].get(CONF_NAME)
+    icon         = config[DOMAIN].get(CONF_ICON)
 
     # Store config in hass.data
-    hass.data[DOMAIN_DATA][CONF_HOST] 			= host
-    hass.data[DOMAIN_DATA][CONF_QUERY_PORT] 	= query_port
-    hass.data[DOMAIN_DATA][CONF_RCON_PORT] 		= rcon_port
-    hass.data[DOMAIN_DATA][CONF_RCON_PASSWORD] 	= rcon_pw
-    hass.data[DOMAIN_DATA][CONF_NAME] 			= name
-    hass.data[DOMAIN_DATA][CONF_ICON] 			= icon
+    hass.data[DOMAIN_DATA][CONF_HOST]              = host
+    hass.data[DOMAIN_DATA][CONF_QUERY_PORT]        = query_port
+    hass.data[DOMAIN_DATA][CONF_RCON_PORT]         = rcon_port
+    hass.data[DOMAIN_DATA][CONF_RCON_PASSWORD]     = rcon_pw
+    hass.data[DOMAIN_DATA][CONF_NAME]              = name
+    hass.data[DOMAIN_DATA][CONF_ICON]              = icon
 
     # Initiate the component
     hass.data[DOMAIN_DATA]["client"] = MinecraftServerSensor(hass, host, query_port, rcon_port, rcon_pw)
@@ -138,10 +137,10 @@ class MinecraftServerSensor:
     """A class for the Minecraft Server Sensor."""
 
     def __init__(self, hass, host, query_port, rcon_port, rcon_pw):
-        self._hass 			= hass
-        self._host 			= host
-        self._query_port	= query_port
-        self._rcon_port		= rcon_port
+        self._hass          = hass
+        self._host          = host
+        self._query_port    = query_port
+        self._rcon_port     = rcon_port
         self._rcon_pw       = rcon_pw
 
     @Throttle(MIN_TIME_BETWEEN_UPDATES)
@@ -158,7 +157,7 @@ class MinecraftServerSensor:
             try:
                 with RCON(self._host, self._rcon_port) as client:
                     client.login(self._rcon_pw)
-                    self._hass.data[DOMAIN_DATA][ATTR_SEED] 			= client.seed
+                    self._hass.data[DOMAIN_DATA][ATTR_SEED]             = client.seed
                     self._hass.data[DOMAIN_DATA][ATTR_MANSION_LOCATION] = client.locate('Mansion')
             except:
                 _LOGGER.info('Retrieving RCON data failed')
