@@ -15,6 +15,7 @@ minecraft:
   query_port: <QUERY_PORT> # (Default: 25565)
   rcon_port: <RCON_PORT> # (Default: None)
   rcon_password: <RCON_PASSWORD> # (Default: None)
+  notify: true # (Default: true, set to false to remove notify services)
   icon: <ICON> # (Default: mdi:minecraft)
   name: <SENSOR_NAME> # (Default: Minecraft Server (sensor.minecraft_server))
   sensor: # List of default sensors
@@ -62,9 +63,9 @@ Sends a stop command to the server (without saving). <br><br>
 Sends a reload command to the server (Reloads loot tables, advancements, and functions from disk). <br><br>
 #### minecraft.save
 Sends a save-all command to the server <br><br>
-#### notify.minecraft_server
+#### notify.minecraft
 Sends a message on your server. Takes service_data `message`, `title` (Name ingame, blank none, default: 'Home Assistant'), `target` (Receiving player(s). default: '@a') <br><br>
-#### notify.minecraft_server_title
+#### notify.minecraft_title
 Sends a title on your server. Takes service_data `message`, `title` (Style of title, `title` | `subtitle` | `actionbar`, default: 'title'), `target` (Receiving player(s). default: '@a')<br><br>
 
 ## Legal

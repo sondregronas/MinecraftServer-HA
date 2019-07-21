@@ -2,7 +2,7 @@
 # Base component constants
 DOMAIN = "minecraft"
 DOMAIN_DATA = "{}_data".format(DOMAIN)
-VERSION = "0.0.1"
+VERSION = "0.9.1"
 PLATFORMS = ["sensor"]
 REQUIRED_FILES = [
     "const.py",
@@ -27,6 +27,7 @@ CONF_HOST              = 'host'
 CONF_QUERY_PORT        = 'query_port'
 CONF_RCON_PORT         = 'rcon_port'
 CONF_RCON_PASSWORD     = 'rcon_password'
+CONF_NOTIFY            = 'notify'
 CONF_NAME              = 'name'
 CONF_ICON              = 'icon'
 CONF_SENSOR            = 'sensor'
@@ -34,6 +35,7 @@ CONF_SENSOR            = 'sensor'
 # Defaults
 DEFAULT_HOST           = '127.0.0.1'
 DEFAULT_QUERY_PORT     = 25565
+DEFAULT_NOTIFY         = True
 DEFAULT_NAME           = 'Minecraft Server'
 DEFAULT_ICON           = "mdi:minecraft"
 DEFAULT_SENSOR         = ['motd', 'game_type', 'version', 'map', 'players']
