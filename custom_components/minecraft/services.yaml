@@ -17,7 +17,7 @@ reload:
 save:
     description: Saves the server to disk.
 
-minecraft_server_title:
+minecraft_title:
     description: Send a title to your Minecraft server. Use 'minecraft.send_command' to set title times.
     fields:
         message:
@@ -32,7 +32,7 @@ minecraft_server_title:
             description: Receiving players. Default '@a'
             example: 'Dinnerbone'
 
-minecraft_server:
+minecraft:
     description: Sends a message on your Minecraft Server
     fields:
         message:
