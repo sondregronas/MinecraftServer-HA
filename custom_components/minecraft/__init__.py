@@ -24,6 +24,7 @@ from .const import (
     CONF_QUERY_PORT,     DEFAULT_QUERY_PORT,
     CONF_RCON_PORT,
     CONF_RCON_PASSWORD,
+    CONF_NOTIFY,         DEFAULT_NOTIFY,
     CONF_NAME,           DEFAULT_NAME,
     CONF_ICON,           DEFAULT_ICON,
     CONF_SENSOR,         DEFAULT_SENSOR,
@@ -45,6 +46,7 @@ CONFIG_SCHEMA = vol.Schema(
                 vol.Optional(CONF_QUERY_PORT,        default=DEFAULT_QUERY_PORT):        cv.port,
                 vol.Optional(CONF_RCON_PORT):                                            cv.port,
                 vol.Optional(CONF_RCON_PASSWORD):                                        cv.string,
+                vol.Optional(CONF_NOTIFY,            default=DEFAULT_NOTIFY):            cv.boolean,
                 vol.Optional(CONF_NAME,              default=DEFAULT_NAME):              cv.string,
                 vol.Optional(CONF_ICON,              default=DEFAULT_ICON):              cv.string,
                 vol.Optional(CONF_SENSOR,            default=DEFAULT_SENSOR):            vol.All(cv.ensure_list, [vol.In(SENSOR_TYPES)]),
@@ -73,6 +75,7 @@ async def async_setup(hass, config):
     query_port   = config[DOMAIN].get(CONF_QUERY_PORT)
     rcon_port    = config[DOMAIN].get(CONF_RCON_PORT)
     rcon_pw      = config[DOMAIN].get(CONF_RCON_PASSWORD)
+    notify       = config[DOMAIN].get(CONF_NOTIFY)
     name         = config[DOMAIN].get(CONF_NAME)
     icon         = config[DOMAIN].get(CONF_ICON)
 
@@ -102,7 +105,7 @@ async def async_setup(hass, config):
 
 
     """RCON Notify Services"""
-    if rcon_pw is not None and rcon_port is not None:
+    if notify and rcon_pw is not None and rcon_port is not None:
         from mcipc.rcon import Client as RCON
 
         async def minecraft_notify(call):
@@ -128,8 +131,8 @@ async def async_setup(hass, config):
                 client.login(rcon_pw)
                 return client.run('title', call_target + ' %s {"text":"%s"}' %(call_title, call_message))
 
-        hass.services.async_register('notify', 'minecraft_server', minecraft_notify)
-        hass.services.async_register('notify', 'minecraft_server_title', minecraft_notify_title)
+        hass.services.async_register('notify', 'minecraft', minecraft_notify)
+        hass.services.async_register('notify', 'minecraft_title', minecraft_notify_title)
 
     return True
 
