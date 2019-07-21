@@ -120,6 +120,7 @@ class MinecraftSensor(Entity):
         except:
             # Query is either disabled or server is offline
             self._state = 'Unavailable'
+            self._players = ''
             return
 
         # Get mcipc.rcon updates
