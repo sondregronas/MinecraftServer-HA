@@ -1,5 +1,9 @@
+# Update
+I haven't been keeping this up to date very well, nor have I gotten the time to look at the issues - sorry about that!<br>
+This project is no longer being worked on, and I don't think it works anymore - even if it did it's not efficient :)<br>
+I've gone ahead and archived the project.
 
-# MinecraftServer-HA [<img align="right" src=media/coffee.png>](https://www.buymeacoffee.com/JSz8KGIkD) 
+# MinecraftServer-HA
 A component for reading Minecraft server stats and issuing commands using RCON! Based on the [awesome mcipc project](https://github.com/conqp/mcipc). <br>
 
 ![Screenshot](media/screenshot.PNG) <br> <br>
